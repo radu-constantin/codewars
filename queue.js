@@ -43,17 +43,24 @@ Algorithm
 */
 
 function queueTime(customers, numOfTills) {
+  //Handles cases when there are 0 customers or 0 tills;
   if (customers.length === 0 || numOfTills === 0) {
     return 0;
   }
 
+  //Handles cases when the number of tills is greater than the number of customers;
+  if (numOfTills > customers.length) {
+    return Math.max(...customers);
+  }
+
   let tills = [];
   
+  //Creates the tills as subArrays of an Array;
   for (let i = 0; i < numOfTills; i += 1) {
     tills.push([]);
   }
 
-  //Need to be re-framed in order to handle less customers than tills.
+  //Pushes the initial customers to each till;
   tills.forEach(till => till.push(customers.shift()));
 
   customers.forEach(function (customer) {
